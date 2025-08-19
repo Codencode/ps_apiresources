@@ -22,6 +22,7 @@ declare(strict_types=1);
 
 namespace PsApiResourcesTest\Integration\ApiPlatform;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Resources\DatabaseDump;
 use Tests\Resources\Resetter\LanguageResetter;
@@ -160,7 +161,12 @@ class CategoryEndpointTest extends ApiTestCase
     public function testDeleteCategory(int $categoryId): void
     {
         // Delete the item
-        $this->deleteItem('/category/' . $categoryId, ['category_write'], null, ['query' => ['mode' => 'associate_and_disable']]);
+        $this->requestApi(
+            Request::METHOD_DELETE,
+            '/category/' . $categoryId,
+             ['mode' => 'associate_and_disable'],
+             ['category_write']
+        );
 
         // Fetching the item returns a 404 indicatjng it no longer exists
         $this->getItem('/category/' . $categoryId, ['category_read'], Response::HTTP_NOT_FOUND);
