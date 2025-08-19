@@ -141,6 +141,8 @@ class CategoryEndpointTest extends ApiTestCase
     {
         $paginated = $this->listItems('/categories', ['category_read']);
 
+        var_dump($paginated);
+
         $this->assertGreaterThanOrEqual(10, $paginated['totalItems']);
 
         // First item should be our test category
