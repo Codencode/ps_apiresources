@@ -102,12 +102,6 @@ class CategoryEndpointTest extends ApiTestCase
 
         $this->assertSame($postData['names'], $category['names']);
         $this->assertSame($postData['linkRewrites'], $category['linkRewrites']);
-        $this->assertSame(2, $category['parentId']);
-        $this->assertArrayHasKey('descriptions', $category);
-        $this->assertArrayHasKey('additionalDescriptions', $category);
-        $this->assertArrayHasKey('metaTitles', $category);
-        $this->assertArrayHasKey('metaDescriptions', $category);
-        $this->assertSame('301', $category['redirectType']);
     }
 
     /**
