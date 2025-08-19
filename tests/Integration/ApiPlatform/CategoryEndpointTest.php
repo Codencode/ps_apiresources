@@ -164,8 +164,8 @@ class CategoryEndpointTest extends ApiTestCase
         $this->requestApi(
             Request::METHOD_DELETE,
             '/category/' . $categoryId,
-             ['mode' => 'associate_and_disable'],
-             ['category_write']
+            ['mode' => 'associate_and_disable'],
+            ['category_write']
         );
 
         // Fetching the item returns a 404 indicatjng it no longer exists
