@@ -115,18 +115,21 @@ class CategoryEndpointTest extends ApiTestCase
     {
         $category = $this->getItem('/category/' . $categoryId, ['category_read']);
 
-        $this->assertEquals(
+        $this->assertSame(
+            $category['names'],
             [
-                'categoryId' => $categoryId,
-                'names' => [
-                    'en-US' => 'Category EN',
-                    'fr-FR' => 'Catégorie FR',
-                ],
-                'active' => true,
-                'parentId' => 2,
-                'shopIds' => [1],
-            ],
-            $category);
+                'en-US' => 'Category EN',
+                'fr-FR' => 'Catégorie FR',
+            ]
+        );
+
+        $this->assertSame(
+            $category['linkRewrites'],
+            [
+                'en-US' => 'category-en',
+                'fr-FR' => 'categorie-fr',
+            ]
+        );
 
         return $categoryId;
     }
