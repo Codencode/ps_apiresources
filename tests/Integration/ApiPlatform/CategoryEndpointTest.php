@@ -161,7 +161,7 @@ class CategoryEndpointTest extends ApiTestCase
     public function testDeleteCategory(int $categoryId): void
     {
         // Delete the item
-        $this->deleteItem('/category/' . $categoryId, ['category_write']);
+        $this->deleteItem('/category/' . $categoryId, ['category_write'], null, ['mode' => 'associate_and_disable']);
 
         // Fetching the item returns a 404 indicatjng it no longer exists
         $this->getItem('/category/' . $categoryId, ['category_read'], Response::HTTP_NOT_FOUND);
