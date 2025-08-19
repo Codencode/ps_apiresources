@@ -146,7 +146,6 @@ class CategoryEndpointTest extends ApiTestCase
         // First item should be our test category
         $first = $paginated['items'][0];
 
-        // Minimal expected list row structure (align with your CategoryList ApiResource)
         $this->assertArrayHasKey('categoryId', $first);
         $this->assertArrayHasKey('name', $first);
         $this->assertArrayHasKey('active', $first);
@@ -161,7 +160,7 @@ class CategoryEndpointTest extends ApiTestCase
     public function testDeleteCategory(int $categoryId): void
     {
         // Delete the item
-        $this->deleteItem('/category/' . $categoryId, ['category_write'], null, ['mode' => 'associate_and_disable']);
+        $this->deleteItem('/category/' . $categoryId, ['category_write'], null, ['query' => ['mode' => 'associate_and_disable']]);
 
         // Fetching the item returns a 404 indicatjng it no longer exists
         $this->getItem('/category/' . $categoryId, ['category_read'], Response::HTTP_NOT_FOUND);
