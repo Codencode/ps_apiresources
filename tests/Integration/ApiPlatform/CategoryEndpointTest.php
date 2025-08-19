@@ -139,7 +139,7 @@ class CategoryEndpointTest extends ApiTestCase
      */
     public function testListCategories(int $categoryId): int
     {
-        $paginated = $this->listItems('categories/', ['category_read']);
+        $paginated = $this->listItems('/categories', ['category_read']);
 
         $this->assertGreaterThanOrEqual(10, $paginated['totalItems']);
 
