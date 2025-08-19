@@ -88,8 +88,12 @@ class CategoryEndpointTest extends ApiTestCase
                 'en-US' => 'Category EN',
                 'fr-FR' => 'Catégorie FR',
             ],
-            'active' => true,
-            'parentId' => 2,
+            'linkRewrites' => [
+                'en-US' => 'category-en',
+                'fr-FR' => 'categorie-fr',
+            ],
+            'isActive' => true,
+            'parentCategoryId' => 2,
             'shopIds' => [1],
         ];
 
