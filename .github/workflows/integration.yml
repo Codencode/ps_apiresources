@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [ '8.1', '8.2', '8.3', '8.4' ]
-        prestashop_version: ['develop', '9.0.x']
+        php: [ '8.2']
+        prestashop_version: [ '9.0.x']
       fail-fast: false
     steps:
       - name: Checkout module code
@@ -32,6 +32,15 @@ jobs:
           repository: PrestaShop/PrestaShop
           path: prestashop
           ref: ${{ matrix.prestashop_version }}
+      - name: Cache Composer (module)
+        uses: actions/cache@v3
+        with:
+          path: |
+            ps_apiresources/vendor
+            ~/.cache/composer
+          key: module-composer-${{ runner.os }}-${{ hashFiles('ps_apiresources/composer.lock') }}
+          restore-keys: |
+            module-composer-${{ runner.os }}-
       - name: Build Docker
         timeout-minutes: 15
         env:
