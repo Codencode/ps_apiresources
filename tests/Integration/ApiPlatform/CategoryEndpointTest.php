@@ -81,7 +81,7 @@ class CategoryEndpointTest extends ApiTestCase
         ];
     }
 
-    public function testAddCategory(): void
+    public function testAddCategory(): int
     {
         $postData = [
             'names' => [
@@ -98,10 +98,14 @@ class CategoryEndpointTest extends ApiTestCase
         ];
 
         $category = $this->createItem('/category', $postData, ['category_write']);
+        $categoryId = $category['categoryId'];
+
         $this->assertArrayHasKey('categoryId', $category);
 
         $this->assertSame($postData['names'], $category['names']);
         $this->assertSame($postData['linkRewrites'], $category['linkRewrites']);
+
+        return $categoryId;
     }
 
     /**
